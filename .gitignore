@@ -1,0 +1,28 @@
+# Directories
+node_modules/
+dist/
+coverage/
+
+# Logs and build files
+*.log
+*.pid
+*.out
+*.err
+.DS_Store
+*.lock
+*.sqlite3
+
+# Dependency lock files
+yarn.lock
+package-lock.json
+
+# Environment variables
+.env
+
+# IDE files
+.vscode/
+.idea/
+
+# Miscellaneous
+*.zip
+*.tar.gz
