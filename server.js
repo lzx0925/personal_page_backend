@@ -43,8 +43,12 @@ app.post("/save_wordle", async (req, res) => {
 /*---------------------Wordle--------------------------*/
 
 /*--------------------Four Nums------------------------*/
-app.post("/", (req, res) => {
-  res.status(200,{ message: "OK"});
+app.get('/', (req, res) => {
+  res.sendStatus(200);
+});
+
+app.post('/', (req, res) => {
+  res.sendStatus(200);
 });
 
 app.post("/fourNums", (req, res) => {
