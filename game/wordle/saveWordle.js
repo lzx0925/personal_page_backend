@@ -1,4 +1,4 @@
-const Wordle = require("../../models/Wordle");
+const Wordle = require("../../models/wordle");
 
 const saveWordle = async function (email, stage) {
   const newHistory = new Wordle({ user: email, stage: stage });

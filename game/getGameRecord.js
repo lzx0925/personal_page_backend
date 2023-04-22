@@ -34,7 +34,7 @@ const getFourNumsRecord = async function (email, result, chance) {
   });
 };
 
-const Wordle = require("../models/Wordle");
+const Wordle = require("../models/wordle");
 
 const getWordleRecord = async function (email, stage) {
   const newHistory = new Wordle({ user: email, stage: stage });
