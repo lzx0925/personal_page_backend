@@ -1,4 +1,4 @@
-const FourNums = require("../models/FourNums");
+const FourNums = require("../models/fourNums");
 const getFourNumsRecord = async function (email, result, chance) {
   const newHistory = new FourNums({
     user: email,
