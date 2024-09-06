@@ -19,6 +19,11 @@ const wordleRoute = require("./routes/wordle");
 
 const app = express();
 
+app.use(
+  cors({
+    origin: "https://www.zixinl.com", // Only allow this origin
+  })
+);
 app.use(express.json());
 app.use(cors());
 // mongoose
@@ -32,7 +37,6 @@ app.use(cors());
 
 app.use("/wordle", wordleRoute);
 /*---------------------Wordle--------------------------*/
-
 
 // app.post("/save_wordle", async (req, res) => {
 //   try {
