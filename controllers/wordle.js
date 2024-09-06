@@ -6,10 +6,11 @@ exports.check_word = async (req, res) => {
     const ans = getTodayWord();
 
     // 将单词转换为小写
-    word = req.body.word.toLowerCase();
+    // word = req.body.word.toLowerCase();
+    word = req.body.word;
     console.log(ans, word);
     // 检查单词是否在表中
-    if (!wordList.has(word)) {
+    if (!wordList.has(word.toLowerCase())) {
       return { error: "Invalid word" }; // 如果单词不存在，返回错误信息
     }
 

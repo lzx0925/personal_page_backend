@@ -11532,11 +11532,11 @@ function getTodayWord() {
   const random = randomSeed.create(seed);
   const wordIndex = random.range(words.length);
   const ans = words[wordIndex];
-  return ans;
+  return ans.toUpperCase();
 }
 /*----generate today random ans---*/
 
 module.exports = {
-    getTodayWord,
-    wordList
-  };
+  getTodayWord,
+  wordList,
+};
