@@ -1,7 +1,7 @@
 const express = require("express");
 const { port, database_url } = require("./config");
 const cors = require("cors");
-const { compareWordle } = require("./game/wordle/wordle");
+
 //const { saveWordle } = require("./game/wordle/saveWordle");
 const { register } = require("./user/register");
 const { login } = require("./user/login");
