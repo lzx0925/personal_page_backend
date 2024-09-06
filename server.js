@@ -1,5 +1,5 @@
 const express = require("express");
-const {port, database_url} = require("./config");
+const { port, database_url } = require("./config");
 const cors = require("cors");
 const { compareWordle } = require("./game/wordle/wordle");
 //const { saveWordle } = require("./game/wordle/saveWordle");
@@ -10,44 +10,48 @@ const { addMessage } = require("./message/addMessage");
 const { getAllMessage, getUserMessage } = require("./message/getMessage");
 const { getFourNums, checkFourNums } = require("./game/fourNums/fourNums");
 const { getFourNumsRecord, getWordleRecord } = require("./game/getGameRecord");
-const mongoose = require("mongoose");
-const url = database_url;
+// const mongoose = require("mongoose");
+// const url = database_url;
+const multer = require("multer");
+const upload = multer();
+
+const wordleRoute = require("./routes/wordle");
+
 const app = express();
 
 app.use(express.json());
 app.use(cors());
-mongoose
-  .connect(url)
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// mongoose
+//   .connect(url)
+//   .then(() => {
+//     console.log("Connected to MongoDB");
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
+app.use("/wordle", wordleRoute);
 /*---------------------Wordle--------------------------*/
-app.post("/wordle", (req, res) => {
-  const word = req.body.word;
-  console.log("word is", word);
-  const result = compareWordle(word);
-  console.log("result is", result);
-  res.send(result);
-});
 
-app.post("/save_wordle", async (req, res) => {
-  //const result = await saveWordle(req.body.email, req.body.stage);
-  const result = await getWordleRecord(req.body.email, req.body.stage);
-  console.log(result);
-  res.send(result);
-});
+
+// app.post("/save_wordle", async (req, res) => {
+//   try {
+//     const result = await getWordleRecord(req.body.email, req.body.stage);
+//     console.log(result);
+//     res.send(result);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("An error occurred while saving Wordle data.");
+//   }
+// });
 /*---------------------Wordle--------------------------*/
 
 /*--------------------Four Nums------------------------*/
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.sendStatus(200);
 });
 
-app.post('/', (req, res) => {
+app.post("/", (req, res) => {
   res.sendStatus(200);
 });
 
@@ -55,10 +59,10 @@ app.post("/fourNums", (req, res) => {
   res.send({ nums: getFourNums() });
 });
 
-app.post("/checkFourNums", async(req, res) => {
+app.post("/checkFourNums", async (req, res) => {
   console.log("founums I get ", req.body);
-  const result = checkFourNums(req.body.expression,req.body.paranthesis);
-  console.log("result I get",result);
+  const result = checkFourNums(req.body.expression, req.body.paranthesis);
+  console.log("result I get", result);
   let gameData = null;
   //if win or lose, save and retrieve game data
   if (result === 24 || (result !== 24 && req.body.chance === 1))

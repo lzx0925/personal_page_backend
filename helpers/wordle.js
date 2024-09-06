@@ -11517,11 +11517,10 @@ const words = [
   "pupal",
 ];
 
-function compareWordle(word) {
+/*----generate today random ans---*/
+function getTodayWord() {
   const randomSeed = require("random-seed");
-  if (!wordList.has(word.toLowerCase())) return false;
 
-  /*----generate today random ans---*/
   const currentDate = new Date();
   const seed =
     currentDate.getFullYear() +
@@ -11529,42 +11528,15 @@ function compareWordle(word) {
     (currentDate.getMonth() + 1) +
     "-" +
     currentDate.getDate();
-  // console.log("seed is", seed);
+
   const random = randomSeed.create(seed);
-  // console.log("random is", random);
   const wordIndex = random.range(words.length);
-  // console.log("index is ", wordIndex);
-  const ans = words[wordIndex].toUpperCase();
-  /*----generate today random ans---*/
-  console.log("now ans is ", ans);
-  let countAns = new Map();
-  for (const c of ans)
-    countAns.set(c, countAns.has(c) ? countAns.get(c) + 1 : 1);
-  var wordForCount = ans;
-  let result = []; //-1: does not exist, 0: wrong pos, 1: right pos
-  let keyboard = new Map();
-  for (let i = 0; i < 5; i++) {
-    if (!wordForCount.includes(word[i])) {
-      result.push(-1);
-      if (keyboard[word[i]] != 1 && keyboard[word[i]] != 0)
-        keyboard[word[i]] = -1;
-    } else {
-      wordForCount = wordForCount.replace(word[i], "", 1); // avoid duplicate letters cannot be recognized
-      if (word[i] != ans[i]) {
-        result.push(0);
-        keyboard[word[i]] = 0;
-      } else {
-        result.push(1);
-        if (countAns.get(word[i]) > 1) keyboard.set(word[i], 0);
-        else keyboard[word[i]] = 1;
-        countAns.set(word[i], countAns.get(word[i]) - 1);
-      }
-    }
-  }
-  
-  return { result: result, keyboard: JSON.stringify(keyboard) };
+  const ans = words[wordIndex];
+  return ans;
 }
+/*----generate today random ans---*/
 
 module.exports = {
-  compareWordle: compareWordle,
-};
+    getTodayWord,
+    wordList
+  };
